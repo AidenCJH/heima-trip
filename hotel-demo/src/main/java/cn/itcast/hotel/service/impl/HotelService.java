@@ -8,12 +8,15 @@ import cn.itcast.hotel.pojo.RequestParams;
 import cn.itcast.hotel.service.IHotelService;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.elasticsearch.common.unit.DistanceUnit;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
@@ -169,6 +172,32 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
                 list.add(text);
             }
             return list;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void insertById(Long id) {
+        try {//准备request
+            Hotel hotel = getById(id);
+            HotelDoc hotelDoc = new HotelDoc(hotel);
+            IndexRequest request = new IndexRequest("hotel").id(hotel.getId().toString());
+            //准备DSL
+            request.source(JSON.toJSONString(hotelDoc), XContentType.JSON);
+            //发送请求
+            client.index(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        try {//准备request
+            DeleteRequest request = new DeleteRequest("hotel", id.toString());
+            //发送请求
+            client.delete(request, RequestOptions.DEFAULT);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
