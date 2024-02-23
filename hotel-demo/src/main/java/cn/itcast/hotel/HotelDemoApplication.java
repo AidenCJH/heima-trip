@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+//
 @MapperScan("cn.itcast.hotel.mapper")
 @SpringBootApplication
 public class HotelDemoApplication {
