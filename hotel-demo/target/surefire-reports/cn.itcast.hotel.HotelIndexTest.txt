@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: cn.itcast.hotel.HotelIndexTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.308 s <<< FAILURE! - in cn.itcast.hotel.HotelIndexTest
+createHotelIndex  Time elapsed: 0.116 s  <<< ERROR!
+org.elasticsearch.ElasticsearchStatusException: Elasticsearch exception [type=resource_already_exists_exception, reason=index [hotel/xpq4BnRjTiybTjOGlaGGeQ] already exists]
+	at cn.itcast.hotel.HotelIndexTest.createHotelIndex(HotelIndexTest.java:31)
+

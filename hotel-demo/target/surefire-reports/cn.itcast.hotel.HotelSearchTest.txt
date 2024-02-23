@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: cn.itcast.hotel.HotelSearchTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.068 s <<< FAILURE! - in cn.itcast.hotel.HotelSearchTest
+testMatchAll  Time elapsed: 0.066 s  <<< ERROR!
+org.elasticsearch.ElasticsearchStatusException: Elasticsearch exception [type=index_not_found_exception, reason=no such index [hotel]]
+	at cn.itcast.hotel.HotelSearchTest.testMatchAll(HotelSearchTest.java:43)
+
